@@ -3,6 +3,23 @@
   <% @todos.each do |todo| %>
     <h3>
       <%= link_to todo.title, todo_path(todo) %>
+      <% case todo.priority %>
+        <% when 'mild' %>
+          !
+        <% when 'medium' %>
+          !!
+        <% when 'high' %>
+          !!!
+        <% when 'urgent' %>
+          !!!!!
+      <% end %>
+      <% if todo.complete %>
+        <%= '√' %>
+      <% end %>
+      <%= link_to 'Edit', edit_todo_path(todo) %>
+      <%= link_to 'Delete', todo_path(todo),
+            method: :delete,
+            data: { confirm: 'Really Delete?'} %>
     </h3>
   <% end %>
 
@@ -11,3 +28,5 @@
 <% end %>
 
 <%= link_to 'New Task', new_todo_path, class: 'btn' %>
+<%= link_to 'Completed Tasks', completed_path %>
+<%= link_to 'Home', root_path %>

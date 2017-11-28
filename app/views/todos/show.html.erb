@@ -1,2 +1,24 @@
 <h1>Task</h1>
-<%= @todo.title %>
+<blockquote>
+  <%= @todo.title %>
+  <br/>
+  <%= @todo.description %>
+  <br/>
+  <i>priority: <%= @todo.priority %></i>
+  <br/>
+  <i>complete:
+    <% if @todo.complete %>
+      yes
+    <% else %>
+      no
+    <% end %>
+    </i>
+</blockquote>
+
+<div class = 'action buttons'>
+  <%= link_to 'Edit', edit_todo_path(@todo) %>
+  <%= link_to 'Delete', todo_path(@todo),
+        method: :delete,
+        data: { confirm: 'Really Delete?'} %>
+  <%= link_to 'All Tasks', todos_path %>
+</div>
